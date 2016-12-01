@@ -1,0 +1,71 @@
+--1. Create a collection named orders.
+db.createCollection('orders')
+var orders = db.orders;
+
+--2. Insert at least 3 documents that represent an order. IMPORTANT: See section below for fields.
+
+orders.insert({
+orderDate: new Date("2015-12-24"),
+orderTotal: 150,
+lineItems: [
+              {
+              unitPirce: 150 ,
+              quantity: 1 ,
+              productName: "happy clapper"
+              }
+            ]
+        });
+
+orders.insert({
+orderDate: new Date("2016-01-02"),
+orderTotal: 100,
+lineItems: [
+              {
+              unitPirce: 50 ,
+              quantity: 2 ,
+              productName: "dumb thing"
+              }
+            ]
+        });
+
+orders.insert({
+orderDate: new Date("2015-12-26"),
+orderTotal: 100,
+lineItems: [
+              {
+              unitPirce: 25 ,
+              quantity: 4 ,
+              productName: "cool thing"
+              }
+            ]
+        });
+
+--3. Find a single order document, any order document.
+  orders.find({orderTotal: 300});
+
+--4. Find all orders and make them look pretty.
+  orders.find().pretty();
+
+--5. Find all orders with an orderDate that is prior to 1/1/2016.
+  orders.find({$lt: {new Date: (2016-01-01)}
+
+--6. Find all orders with an orderDate that is after 1/1/2016.
+
+  orders.find({$gt: {new Date: (2016-01-01)}
+
+--7. Find orders with lineItems that have a quantity that is less than 50, but greater than 5. HINT: Look at $and and dot notation.
+
+      db.getCollection('orders').find({
+
+      'lineItems.quantity': {$lt: 51},
+      'lineItems.quantity': {$gt: 1}
+
+      })
+
+--8. Update one of your line items to 42.99. HINT: Look at dot notation
+
+  orders.update({_id: ObjectId("583f544c1d635ecfbbab9814")}, {$set: {orderDate: new Date("2015-12-24")}} )
+
+--9. Remove one of your orders.
+
+  orders.remove({_id: ObjectId("583f544c1d635ecfbbab9814")}
